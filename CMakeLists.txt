@@ -1,20 +1,27 @@
 cmake_minimum_required(VERSION 3.6)
-project(can_node C ASM)
+project(can_node C CXX ASM)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 add_definitions(-DSTM32F107xC)
 add_definitions(-mcpu=cortex-m3)
 add_definitions(-DDEBUG )
+add_definitions(-DUAVCAN_STM32_BAREMETAL)
+add_definitions(-DUAVCAN_STM32_TIMER_NUMBER=4)
+add_definitions(-DUAVCAN_STM32_NUM_IFACES=2)
+add_definitions(-DUAVCAN_USE_EXTERNAL_SNPRINTF=1)
 
 include_directories(CMSIS/Include)
 include_directories(CMSIS/Device/ST/STM32F1xx/Include)
 include_directories(inc)
 include_directories(STM32F1xx_HAL_Driver/Inc)
 include_directories(BSP/VIEWTOOL_F107)
-include_directories(libuavcan/libuavcan/include/uavcan)
+
+# libuavcan includes
+include_directories(libuavcan/libuavcan/include)
 include_directories(libuavcan/libuavcan_drivers/stm32/driver/include)
 include_directories(libuavcan/libuavcan/include/dsdlc_generated)
+
 
 set(SOURCE_FILES
     src/main.c
