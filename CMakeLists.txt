@@ -3,19 +3,15 @@ project(can_node C ASM)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-
 add_definitions(-DSTM32F107xC)
-#add_definitions(-DSTM32F10X_CL)
 add_definitions(-mcpu=cortex-m3)
 add_definitions(-DDEBUG )
-
 
 include_directories(CMSIS/Include)
 include_directories(CMSIS/Device/ST/STM32F1xx/Include)
 include_directories(inc)
 include_directories(STM32F1xx_HAL_Driver/Inc)
 include_directories(BSP/VIEWTOOL_F107)
-
 
 set(SOURCE_FILES
     STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c
@@ -74,7 +70,7 @@ set(SOURCE_FILES
     )
 
 
-add_executable(stm32f10xx ${SOURCE_FILES})
+add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
 add_executable(${PROJECT_NAME}.elf ${SOURCE_FILES} ${LINKER_SCRIPT})
 
